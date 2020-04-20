@@ -31,12 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # installed apps
+    'accounts',
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     # django-storages
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -71,8 +76,7 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL = 'accounts.Account'
-
-WSGI_APPLICATION = 'dujob.wsgi.application'
+WSGI_APPLICATION = 'autoblog.wsgi.application'
 
 
 # Database
