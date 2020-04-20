@@ -15,7 +15,33 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# Site View
+from home.views import (home_screen_view)
+from blog.views import (blog_screen_view)
+from gallery.views import (gallery_screen_view, full_screen_view)
+from contacts.views import (contact_screen_view)
+from portfolio.views import (portfolio_screen_view)
+from accounts.views import(sign_up_view,sign_in_view,logout_view)
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
+    path('', home_screen_view, name='home'),
     path('admin/', admin.site.urls),
+    path('blog/', blog_screen_view, name='blog'),   
+    path('gallery/', gallery_screen_view, name='gallery'),
+    path('full_screen', full_screen_view, name='full_screen'),
+    path('portfolio/', portfolio_screen_view, name='portfolio'),
+    path('contacts/', contact_screen_view, name='contacts'),
+    path('signup/', sign_up_view, name='sign_up'),
+    path('signin/', sign_in_view, name='sign_in'),
+    path('logout/', logout_view, name='logout'),
+    path('result_search/', blog_screen_view, name='result_search'),
+    path('<slug>/', blog_screen_view, name='single_post'),
+    path('category/', blog_screen_view, name='category'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

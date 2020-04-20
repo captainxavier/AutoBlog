@@ -1,0 +1,265 @@
+{% extends "base.html" %} 
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+    <!-- animsition-overlay start -->
+    <main class="animsition-overlay" data-animsition-overlay="true">
+    <!-- home-slider start -->
+		<main class="animsition-overlay" data-animsition-overlay="true">
+			<!-- home-slider start -->
+			<section class="home-slider" id="up">
+           {% for super_featured_post in super_featured_posts %} 
+           {% if forloop.first %} 
+           <!-- swiper-wrapper start -->
+			  	<div class="swiper-wrapper">
+				  	<!-- swiper-slide start -->
+				  	<div class="swiper-slide flex-min-height-box home-slide">
+					  	<!-- slide-bg -->
+				      	<div class="slide-bg overlay-loading2 overlay-dark-bg-1" style="background-image:url({{super_featured_post.thumbnail.url }})"></div>
+				      	<!-- home-slider-content start -->
+					  	<div class="home-slider-content flex-min-height-inner dark-bg-1">
+						  	<!-- flex-container start -->
+					      	<div class="container top-bottom-padding-120 flex-container response-999">
+						      	<!-- column start -->
+						      	<div class="six-columns six-offset">
+							      	<div class="content-left-margin-40">
+								      	<h2 class="large-title-bold">
+							  				<span class="slider-title-fill slider-tr-delay01" data-text="{{ super_featured_post.title }}">{{ super_featured_post.title }}</span>
+						  				</h2>						  			
+                      {% for cat in super_featured_post.categories.all  %}
+                        <p class="p-style-bold-up text-height-20 d-flex-wrap">                
+					          	      <span class="slider-title-fill slider-tr-delay04" data-text="{{cat}}">{{cat}}</span>
+                        </p>                    
+                        {% endfor %}									  	
+									  	<div class="slider-fade slider-tr-delay07 top-margin-30">
+										  	<div class="border-btn-box border-btn-red pointer-large">
+												<div class="border-btn-inner">
+										      		<a href="{% url 'single_post' super_featured_post.slug  %}" class="border-btn" data-text="Read more">Read more</a>
+										    	</div>
+											</div>
+									  	</div>
+							      	</div>
+						      	</div><!-- column end -->
+					      	</div><!-- flex-container end -->
+				      	</div><!-- home-slider-content end -->
+				    </div><!-- swiper-slide end -->				  	
+            {% elif forloop.last %}
+              <!-- swiper-slide start -->
+				    <div class="swiper-slide flex-min-height-box home-slide">
+					    <!-- slide-bg -->
+				      	<div class="slide-bg" style="background-image:url({{super_featured_post.thumbnail.url }})"></div>
+				      	<!-- home-slider-content start -->
+					  	<div class="home-slider-content flex-min-height-inner dark-bg-2">
+						  	<!-- flex-container start -->
+					      	<div class="container top-bottom-padding-120 flex-container response-999">
+						      	<!-- column start -->
+						      	<div class="six-columns six-offset">
+							      	<div class="content-left-margin-40">
+                      {% for cat in super_featured_post.categories.all  %}
+								      	<h2 class="slider-overlay2 medium-title red-color">{{cat}}</h2>
+                      {% endfor %}
+								      	<h3 class="large-title-bold text-color-4">
+							  				<span class="slider-overlay2 slider-tr-delay01">{{super_featured_post.title}}</span><br>
+						  				</h3>
+									  	<div class="slider-fade slider-tr-delay04 top-margin-30">
+										  	<div class="border-btn-box pointer-large">
+												<div class="border-btn-inner">
+										      		<a href="{% url 'single_post' super_featured_post.slug  %}" class="border-btn" data-text="Read more">Read more</a>
+										    	</div>
+											</div>
+									  	</div>
+							      	</div>
+						      	</div><!-- column end -->
+					      	</div><!-- flex-container end -->
+				      	</div><!-- home-slider-content end -->
+				    </div><!-- swiper-slide end -->           
+            {% else %}
+            <!-- swiper-slide start -->
+				    <div class="swiper-slide flex-min-height-box home-slide red-slide">
+					    <!-- slide-bg -->
+				      	<div class="slide-bg" style="background-image:url({{super_featured_post.thumbnail.url }})"></div>
+				      	<!-- home-slider-content start -->
+					  	<div class="home-slider-content flex-min-height-inner red-bg">
+						  	<!-- flex-container start -->
+					      	<div class="container top-bottom-padding-120 flex-container response-999">
+						      	<!-- column start -->
+						      	<div class="six-columns">
+							      	<h2 class="large-title-bold">
+						  				<span class="slider-title-fill slider-tr-delay01" data-text="{{ super_featured_post.title }}">{{ super_featured_post.title }}</span>
+					  				</h2>
+								  	<div class="small-title-oswald text-height-20 d-flex-wrap top-margin-20">
+                    {% for cat in super_featured_post.categories.all  %} 
+									  	<span class="slider-title-fill slider-tr-delay04 top-margin-10" data-text="{{cat}}">{{cat}}</span>
+                    {% endfor %}
+								  	</div>
+								  	<div class="arrow-btn-box slider-fade slider-tr-delay06 top-margin-30">
+										<a href="{% url 'single_post' super_featured_post.slug  %}" class="arrow-btn pointer-large">Read more</a>
+									</div>
+						      	</div><!-- column end -->
+					      	</div><!-- flex-container end -->
+				      	</div><!-- home-slider-content end -->
+				    </div><!-- swiper-slide end -->
+            {% endif %}
+            {% endfor %}
+				  
+				    
+			  	</div><!-- swiper-wrapper end -->
+			  	<!-- swiper-button-next start -->
+			  	<div class="swiper-button-next">
+				  	<div class="slider-arrow-next-box">
+					  	<span class="slider-arrow-next"></span>
+				  	</div>
+			  	</div><!-- swiper-button-next end -->
+			  	<!-- swiper-button-prev start -->
+			  	<div class="swiper-button-prev">
+				  	<div class="slider-arrow-prev-box">
+					  	<span class="slider-arrow-prev"></span>
+				  	</div>
+			  	</div><!-- swiper-button-prev end -->
+			  	
+			  	<!-- swiper-pagination -->
+			  	<div class="swiper-pagination"></div>
+			  	
+			  	<!-- scroll-btn start -->
+				<a href="#down" class="scroll-btn pointer-large">
+					<div class="scroll-arrow-box">
+						<span class="scroll-arrow"></span>
+					</div>
+					<div class="scroll-btn-flip-box">
+						<span class="scroll-btn-flip" data-text="Scroll">Scroll</span>
+					</div>
+				 </a><!-- scroll-btn end -->
+			</section><!-- home-slider end -->
+      <!-- section start -->
+
+      <!-- blog start -->
+      <div
+        id="down"
+        class="blog container bottom-padding-30 top-padding-120 light-bg-1"
+        data-midnight="black"
+      >
+        <!-- flex-container start -->
+        <div class="flex-container">
+          <!-- column start -->
+          <div class="eight-columns latest-news">
+            <!-- blog-entry start -->
+            {% for post in posts  %}
+            <article class="bottom-padding-90">
+              <div class="light-bg-2">
+                <a
+                  href="{% url 'single_post' post.slug %}"
+                  class="pointer-large animsition-link hover-box d-block"
+                >
+                  <div
+                    class="overlay-anim-box2 overlay-dark-bg-2"
+                    data-animation="overlay-anim2"
+                    style="width:100%;"
+                  >
+                    <img
+                      class="hover-img"
+                      src="{{ post.thumbnail.url }}"
+                      alt="blog img"
+                      style='height: 350px; width: 100%; object-fit: cover;  object-position: 50% 50%;'
+                    />
+                  </div>
+                  <div class="content-padding-l-r-20" data-animation-container>
+                    <h3
+                      class="title-style text-color-1 top-margin-5 blog-title"
+                    >
+                      <span
+                        data-animation-child
+                        class="overlay-anim-box2 hover-content overlay-dark-bg-2"
+                        data-animation="overlay-anim2"
+                        >{{ post.title }}</span>
+                    </h3>
+                    <p
+                      data-animation-child
+                      class="fade-anim-box hover-content tr-delay03 p-style-medium text-color-2"
+                      data-animation="fade-anim"
+                    >
+                     {{ post.description_one|safe|slice:'280'}}...
+                    </p>
+                  </div>
+                </a>
+                <div
+                  class="content-padding-l-r-20 content-padding-bottom-20"
+                  data-animation-container
+                >
+                <ul
+                    data-animation-child
+                    class="blog-tags top-margin-10 fade-anim-box tr-delay01 text-color-2"
+                    data-animation="fade-anim"
+                  >
+                    <li><i class="fas fa-tags text-color-3"></i></li>
+                    {% for cat in post.categories.all  %}
+                    <li class="p-letter-style pointer-small hover-color">
+                      <a href="#">{{ cat }}</a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  <div
+                    data-animation-child
+                    class="blog-autor-date top-margin-30 fade-anim-box tr-delay02 text-color-1"
+                    data-animation="fade-anim"
+                  >
+                    <a
+                      class="xsmall-title-oswald pointer-small hover-color"
+                      href="#"
+                      >{{ post.author }}</a
+                    >
+                    <a
+                      class="xsmall-title-oswald pointer-small hover-color"
+                      href="#"
+                      >{{ post.date_published|naturaltime}}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+            <!-- blog-entry end -->
+
+            
+
+            <!-- loading more btn start -->
+          
+            <div class="bottom-padding-90 text-center">
+            
+             <div class="arrow-btn-box">
+              {% if posts.has_previous %}
+              <a href="?page={{ posts.previous_page_number }}" class="arrow-btn pointer-large">Back</a>  
+              {% endif %}       
+                
+              </div>
+              
+              <div class="arrow-btn-box">
+              
+              {% if posts.has_next %}
+              <a href="?page={{ posts.next_page_number }}" class="arrow-btn pointer-large">More</a>  
+              {% endif %}       
+                
+              </div>
+              <br>
+              <br>
+              {% for i in posts.paginator.page_range %}
+              {% if posts.number == i %}
+                  <h6> <span> Page {{i}}</span></h6>  
+                 
+                {% endif %}               
+              {% endfor %}              
+            </div>
+            
+            <!-- loading more btn end -->
+          </div>
+          <!-- column end -->
+          <!-- column start -->
+        	{% include 'blog/snippets/sidebar.html'  with recent_posts=recent_posts categories=categories  %}
+          <!-- column end -->
+        </div>
+        <!-- flex-container end -->
+      </div>
+      <!-- blog end -->
+    </main>
+    <!-- animsition-overlay end -->
+  {% endblock %}

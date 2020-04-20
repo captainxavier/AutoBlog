@@ -1,0 +1,644 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+{% load humanize %}
+    <!-- animsition-overlay start -->
+    <main class="animsition-overlay" data-animsition-overlay="true">
+      <!-- home-slider start -->
+			<section class="home-slider fullscreen-home-slider" id="up">
+				<!-- swiper-wrapper start -->
+			  	<div class="swiper-wrapper">
+           {% for super_featured_post in super_featured_posts %} 
+           {% if forloop.first %} 
+				  	<!-- swiper-slide start -->
+				  	<div class="swiper-slide flex-min-height-box home-slide">
+					  	<!-- slide-bg -->
+				      	<div class="slide-bg" style="background-image:
+                linear-gradient(to right, rgba(100,65,165,0.4), rgba(42,8,69,0.2),
+                rgba(0,0,0,0.0)),url({{super_featured_post.thumbnail.url }});"></div>
+				      	<!-- home-slider-content start -->
+					  	<div class="home-slider-content flex-min-height-inner dark-bg-1">
+						  	<!-- container start -->
+					      	<div class="container top-bottom-padding-120">
+                   {% for cat in super_featured_post.categories.all  %}
+                
+					          	<h2 class="slider-overlay2 medium-title red-color"> {{ cat }}, </h2>
+                    
+                   {% endfor %}
+						  	
+								<h3 class="large-title-bold text-color-4">
+							  		<span class="slider-overlay2 slider-tr-delay01">{{ super_featured_post.title }}</span><br>
+						  		</h3>
+								<div class="slider-fade slider-tr-delay04 top-margin-30">
+									<div class="border-btn-box pointer-large">
+										<div class="border-btn-inner">
+										    <a href="{% url 'single_post' super_featured_post.slug  %}" class="border-btn" data-text="Read more">Read more</a>
+										</div>
+									</div>
+								</div>
+					      	</div><!-- container end -->
+				      	</div><!-- home-slider-content end -->
+				    </div><!-- swiper-slide end -->
+            {% elif forloop.last %}
+            <!-- swiper-slide start -->
+				    <div class="swiper-slide flex-min-height-box home-slide">
+					    <!-- slide-bg -->
+				      	<div class="slide-bg" style="background-image:
+                linear-gradient(to right, rgba(0,0,0,0.0), rgba(42,8,69,0.2),
+                rgba(100,65,165,0.4)),url({{super_featured_post.thumbnail.url }});"></div>
+				      	<div class="bg-overlay"></div>
+				      	<!-- home-slider-content start -->
+					  	<div class="home-slider-content flex-min-height-inner dark-bg-1">
+						  	<!-- container start -->
+					      	<div class="container top-bottom-padding-120 text-right">
+						  		<h2 class="large-title-bold text-color-4">
+							  		<span class="slider-overlay2">{{super_featured_post.title}}</span><br>
+						  		</h2>
+                   {% for cat in super_featured_post.categories.all  %}
+                
+					        	<p class="p-style-bold-up text-height-20 slider-fade slider-tr-delay03 text-color-4">{{cat}}</p>
+                    
+                   {% endfor %}
+                   <br>
+						<div class="slider-fade slider-tr-delay04 top-margin-30">
+									<div class="border-btn-box pointer-large">
+										<div class="border-btn-inner">
+										    <a href="{% url 'single_post' super_featured_post.slug  %}" class="border-btn" data-text="Read more">Read more</a>
+										</div>
+									</div>
+								</div>
+					      	</div><!-- container end -->
+				      	</div><!-- home-slider-content end -->
+				    </div><!-- swiper-slide end --> 
+            {% else %}
+              <!-- swiper-slide start -->
+				    <div class="swiper-slide flex-min-height-box home-slide">
+					    <!-- slide-bg -->
+				      	<div class="slide-bg" style="background-image:
+                linear-gradient(to top, rgba(131,58,180,0.3), rgba(253,29,29,0.3),
+                rgba(252,176,69,0.3)),url({{super_featured_post.thumbnail.url }});"></div>
+				      	<div class="bg-overlay"></div>
+				      	<!-- home-slider-content start -->
+					  	<div class="home-slider-content flex-min-height-inner dark-bg-1">
+						  	<!-- container start -->
+					      	<div class="container top-bottom-padding-120 text-center">
+								<h2 class="large-title-bold text-color-4">
+							  		<span class="slider-overlay2">{{ super_featured_post.title }}</span>
+						  		</h2>
+                  {% for cat in super_featured_post.categories.all  %}                 
+                
+					        	<p class="p-style-bold-up text-height-20 slider-fade slider-tr-delay03 text-color-4">{{cat}} </p>
+                    
+                   {% endfor %}
+
+                   <br>
+						  	
+								<div class="slider-fade slider-tr-delay04 top-margin-30">
+									<div class="border-btn-box pointer-large">
+										<div class="border-btn-inner">
+										    <a href="{% url 'single_post' super_featured_post.slug  %}" class="border-btn" data-text="Read more">Read more</a>
+										</div>
+									</div>
+								</div>
+					      	</div><!-- container end -->
+				      	</div><!-- home-slider-content end -->
+				    </div><!-- swiper-slide end --> 
+            {% endif %}
+            {% endfor %}
+				  
+				    
+			  	</div><!-- swiper-wrapper end -->
+			  	
+			  	<!-- swiper-button-next start -->
+			  	<div class="swiper-button-next">
+				  	<div class="slider-arrow-next-box">
+					  	<span class="slider-arrow-next"></span>
+				  	</div>
+			  	</div><!-- swiper-button-next end -->
+			  	<!-- swiper-button-prev start -->
+			  	<div class="swiper-button-prev">
+				  	<div class="slider-arrow-prev-box">
+					  	<span class="slider-arrow-prev"></span>
+				  	</div>
+			  	</div><!-- swiper-button-prev end -->
+			  	
+			  	<!-- swiper-pagination -->
+			  	<div class="swiper-pagination"></div>
+			  	
+			  	<!-- scroll-btn start -->
+				<a href="#down" class="scroll-btn pointer-large">
+					<div class="scroll-arrow-box">
+						<span class="scroll-arrow"></span>
+					</div>
+					<div class="scroll-btn-flip-box">
+						<span class="scroll-btn-flip" data-text="Scroll">Scroll</span>
+					</div>
+				 </a><!-- scroll-btn end -->
+			</section><!-- home-slider end -->
+      <!-- section start -->
+      <section id="down"
+        class="light-bg-1 bottom-padding-30 top-padding-120"
+        data-midnight="black"
+      >
+        <!-- container start -->
+      
+        <div
+          data-animation-container
+          class="container small bottom-padding-60 text-center"
+        >
+          <h2
+            data-animation-child
+            class="large-title text-height-10 text-color-1 overlay-anim-box2"
+            data-animation="overlay-anim2"
+          >
+            Featured Projects
+          </h2>
+          <br />
+          <p
+            data-animation-child
+            class="fade-anim-box tr-delay02 text-color-1 xsmall-title-oswald top-margin-5"
+            data-animation="fade-anim"
+          >
+            
+          </p>
+        </div>
+        <!-- container end -->
+        {% for featured_blog_post in featured_blog_posts %} 
+        {% if forloop.first or forloop.last %}
+        <!-- bottom-padding-90 start -->
+				<div class="bottom-padding-90">
+					<!-- portfolio-content start -->
+					<div class="portfolio-content flex-min-height-box">
+						<!-- portfolio-content-inner start -->
+						<div class="portfolio-content-inner flex-min-height-inner">
+							<!-- flex-container start -->
+							<div class="flex-container container small">
+								<!-- column start -->
+								<div data-animation-container class="six-columns">
+									<div class="content-right-margin-40">
+                    {% for cat in featured_blog_post.categories.all  %}
+                  <span
+                    class="small-title-oswald red-color overlay-anim-box2"
+                    data-animation="overlay-anim2"
+                    >{{cat}}</span
+                  >
+                  {% endfor %}
+										 <h3 class="title-style text-color-1">
+                      <span
+                        data-animation-child
+                        class="overlay-anim-box2 overlay-dark-bg-2 tr-delay01"
+                        data-animation="overlay-anim2"
+                        >{{ featured_blog_post.title }}</span
+                      >              
+                    </h3>
+									  <p
+                      data-animation-child
+                      class="p-style-small text-color-2 fade-anim-box tr-delay04"
+                      data-animation="fade-anim"
+                    > {{ featured_blog_post.description_one|striptags|safe| slice:":255" }} </p>
+										
+										<div data-animation-child class="arrow-btn-box top-margin-30 fade-anim-box tr-delay05" data-animation="fade-anim">
+											<a href="{% url 'single_post' featured_blog_post.slug  %}" class="arrow-btn pointer-large animsition-link">Read more</a>
+										</div>
+										
+									</div>
+								</div><!-- column end -->
+								<!-- column start -->
+								<div class="six-columns top-padding-60">
+									<a href="{% url 'single_post' featured_blog_post.slug  %}" class="portfolio-content-bg-box pointer-large hover-box hidden-box animsition-link">
+										<div class="portfolio-content-bg hover-img overlay-anim-box2 overlay-dark-bg-2" data-animation="overlay-anim2" style="background-image:url({{featured_blog_post.thumbnail.url }})"></div>
+									</a>
+								</div><!-- column end -->
+							</div><!-- flex-container end -->
+						</div><!-- portfolio-content-inner end -->
+					</div><!-- portfolio-content end -->
+				</div><!-- bottom-padding-90 end -->
+        {% endif %}
+        {% if not forloop.first and not forloop.last %}
+				
+				<!-- bottom-padding-90 start -->
+				<div class="bottom-padding-90">
+					<!-- portfolio-content start -->
+					<div class="portfolio-content flex-min-height-box">
+						<!-- portfolio-content-inner start -->
+						<div class="portfolio-content-inner flex-min-height-inner">
+							<!-- flex-container start -->
+							<div class="flex-container reverse container small">
+								<!-- column start -->
+								<div class="six-columns top-padding-60">
+									<a href="{% url 'single_post' featured_blog_post.slug  %}" class="portfolio-content-bg-box pointer-large hover-box hidden-box animsition-link">
+										<div class="portfolio-content-bg hover-img overlay-anim-box2 overlay-dark-bg-2" data-animation="overlay-anim2" style="background-image:url({{featured_blog_post.thumbnail.url}})"></div>
+									</a>
+								</div><!-- column end -->
+								<!-- column start -->
+								<div data-animation-container class="six-columns">
+									<div class="content-left-margin-40">
+									{% for cat in featured_blog_post.categories.all  %}
+                    <span class="small-title-oswald red-color overlay-anim-box2" data-animation="overlay-anim2" >{{cat}}</span>
+                  {% endfor %}
+									 <h3 class="title-style text-color-1">
+                      <span
+                        data-animation-child
+                        class="overlay-anim-box2 overlay-dark-bg-2 tr-delay01"
+                        data-animation="overlay-anim2"
+                        >{{ featured_blog_post.title }}</span
+                      >              
+                    </h3>
+										  <p
+                      data-animation-child
+                      class="p-style-small text-color-2 fade-anim-box tr-delay04"
+                      data-animation="fade-anim"
+                    > {{ featured_blog_post.description_one|striptags|safe| slice:":255" }} </p>
+										
+										<div data-animation-child class="arrow-btn-box top-margin-30 fade-anim-box tr-delay05" data-animation="fade-anim">
+											<a href="{% url 'single_post' featured_blog_post.slug  %}" class="arrow-btn pointer-large animsition-link">Read more</a>
+										</div>
+										
+									</div>
+								</div><!-- column end -->
+							</div><!-- flex-container end -->
+						</div><!-- portfolio-content-inner end -->
+					</div><!-- portfolio-content end -->
+				</div><!-- bottom-padding-90 end -->
+        {% endif %}
+        {% endfor %}
+      </section>
+      <!-- section end -->
+    <!-- video-content-bg start -->
+      <div
+        class="video-content-bg"
+        style="background-image: url({% static 'images/backgrounds/background-gear.jpg' %});"
+      >
+        <div class="bg-overlay"></div>
+        <a
+          href="https://youtu.be/wXhTHyIgQ_U"
+          class="video-play-button popup-youtube pointer-large"
+        >
+          <span></span>
+        </a>
+      </div>
+      <!-- video-content-bg end -->
+      <!-- section start -->
+      <section class="dark-bg-2">
+        <!-- container start -->
+        <div class="container small top-bottom-padding-120">
+          <!-- medium-title start -->
+          <h2 data-animation-container class="medium-title">
+            <span
+              data-animation-child
+              class="title-fill"
+              data-animation="title-fill-anim"
+              data-text="Featured Brands"
+              >Featured Brands</span
+            >
+          </h2>
+          <!-- medium-title end -->
+
+          <!-- client-list start -->
+          <ul class="client-list d-flex-wrap top-padding-60">
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/merc.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/merc-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/bmw.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/bmw-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                   src="{% static 'images/logo/ferrari.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                     src="{% static 'images/logo/farrari-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/audi.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/audi-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/buggati.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/buggati-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/landrover.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/landrover-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/tesla.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/tesla-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/vw.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/vw-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                   src="{% static 'images/logo/nissan.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/nissan-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/bentley.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/bentley-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="pointer-large d-block">
+                <div class="brand-box">
+                  <img
+                    src="{% static 'images/logo/rolls.png' %}"
+                    alt="Brand"
+                    class="hover-opac-img"
+                  />
+                  <img
+                    src="{% static 'images/logo/rolls-red.png' %}"
+                    alt="Brand"
+                    class="opac-img"
+                  />
+                </div>
+              </a>
+            </li>
+            <li class="empty-spot-box">
+              <a
+                data-animation-container
+                href="#"
+                class="pointer-large p-style-bold-up empty-spot d-block"
+              >
+                <span
+                  data-animation-child
+                  class="title-fill"
+                  data-animation="title-fill-anim"
+                  data-text="And Many"
+                  >And Many</span
+                >
+                <span
+                  data-animation-child
+                  class="title-fill tr-delay01"
+                  data-animation="title-fill-anim"
+                  data-text="More"
+                  >More</span
+                >
+              </a>
+            </li>
+          </ul>
+          <!-- client-list end -->
+        </div>
+        <!-- container end -->
+      </section>
+      <!-- section end -->
+
+  
+
+    	<!-- page-head start -->
+			<section  class="page-head flex-min-height-box dark-bg-2 particles-home">
+				<!-- page-head-bg -->
+				<div class="page-head-bg" id="particles-js" 
+        style="background-image: url({% static 'images/backgrounds/b.jpg' %});"></div>
+				
+				<!-- flex-min-height-inner start -->
+	  			<div class="flex-min-height-inner">
+		  			<!-- container start -->
+		  			<div class="container top-bottom-padding-120">
+					  	<h2 class="overlay-loading2 medium-title red-color">Latest</h2>
+				  		<h3 class="large-title-bold text-color-4">
+							<span class="overlay-loading2 overlay-light-bg-1 tr-delay01">In Tech</span><br>
+				
+						</h3>
+		  			</div><!-- container end -->
+	  			</div><!-- flex-min-height-inner end -->
+	  			
+	  			<!-- scroll-btn start -->
+				<a href="#latest" class="scroll-btn pointer-large">
+					<div class="scroll-arrow-box">
+						<span class="scroll-arrow"></span>
+					</div>
+					<div class="scroll-btn-flip-box">
+						<span class="scroll-btn-flip" data-text="Scroll">Scroll</span>
+					</div>
+				 </a><!-- scroll-btn end -->
+			</section><!-- page-head end -->
+
+    
+
+      <!-- latest-news start -->
+      <section id="latest"
+        class="latest-news top-padding-120 bottom-padding-30 light-bg-1"
+        data-midnight="black"
+      >
+        <!-- container start -->
+        <div class="container">
+          <!-- text-center start -->
+          <div data-animation-container class="text-center">
+            <h2
+              data-animation-child
+              class="large-title text-height-10 text-color-1 overlay-anim-box2"
+              data-animation="overlay-anim2"
+            >
+              Latest the Posts
+            </h2>
+            <br />
+            <p
+              data-animation-child
+              class="fade-anim-box tr-delay02 text-color-1 xsmall-title-oswald top-margin-5"
+              data-animation="fade-anim"
+            >
+              Check our latest Posts
+            </p>
+          </div>
+          <!-- text-center end -->
+
+          <!-- flex-container start -->
+          <div class="flex-container response-999 top-padding-60">
+
+          {% for post in latest_posts %}
+            <!-- column start -->
+            <div class="four-columns bottom-padding-90">
+              <article
+                class="content-right-margin-20 light-bg-2"
+                data-animation-container
+              >
+                <a
+                  href="{% url 'single_post' post.slug  %}"
+                  class="pointer-large animsition-link hover-box d-block"
+                >
+                  <div
+                    class="overlay-anim-box2 overlay-dark-bg-2"
+                    data-animation="overlay-anim2"
+                  >
+                  <img class="hover-img" src="{{ post.thumbnail.url}} " alt="blog img"
+                   style='height: 250px; width: 100%; object-fit: cover;  object-position: 50% 50%;'
+                  >
+    
+                   
+                  </div>
+                  <h3
+                    class="title-style text-color-1 top-margin-30 blog-title content-padding-l-r-20"
+                  >
+                    <span
+                      data-animation-child
+                      class="overlay-anim-box2 hover-content overlay-dark-bg-2 tr-delay01"
+                      data-animation="overlay-anim2"
+                      >{{ post.title}}</span
+                    >
+                  </h3>
+                </a>
+                	<ul data-animation-child class="blog-category top-margin-30 fade-anim-box tr-delay04 text-color-2" data-animation="fade-anim">
+		                                <li><i class="fas fa-thumbtack text-color-3"></i></li>
+		                                <li class="p-letter-style pointer-small hover-color"><a href="#">Latest</a></li>
+		                                <li class="p-letter-style pointer-small hover-color"><a href="#">Post</a></li>
+		                            </ul>
+		                            <ul data-animation-child class="blog-tags top-margin-10 fade-anim-box tr-delay05 text-color-2" data-animation="fade-anim">
+		                                <li><i class="fas fa-tags text-color-3"></i></li>
+		                                <li class="p-letter-style pointer-small hover-color"><a href="#">In</a></li>
+                                    	{% for cat in post.categories.all  %}
+                                        <li class="p-letter-style pointer-small hover-color"><a href="#">{{cat}}</a></li>
+                                      {% endfor %}
+		                               
+		                            </ul>
+                <div class="content-padding-bottom-20 content-padding-l-r-20">
+             
+                  <div
+                    data-animation-child
+                    class="blog-autor-date top-margin-30 fade-anim-box tr-delay06 text-color-1"
+                    data-animation="fade-anim"
+                  >
+                    <a
+                      class="xsmall-title-oswald pointer-small hover-color"
+                      href="{% url 'single_post' post.slug  %}"
+                      >{{ post.author}}</a
+                    >
+                    <a
+                      class="xsmall-title-oswald pointer-small hover-color"
+                      href="{% url 'single_post' post.slug  %}"
+                      >{{ post.date_published|naturaltime}}</a
+                    >
+                  </div>
+                </div>
+              </article>
+            </div>
+            <!-- column end -->
+            {% endfor %}
+           
+          </div>
+          <!-- flex-container end -->
+        </div>
+        <!-- container end -->
+      </section>
+      <!-- latest-news end -->
+    </main>
+    <!-- animsition-overlay end -->
+  {% endblock %}

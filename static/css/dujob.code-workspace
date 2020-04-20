@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": "E:\\Projects\\PythonProjects\\Django\\AutoBlog"
+	},
+	{
+		"path": "E:\\Projects\\admin"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "admin"
+  }
+}

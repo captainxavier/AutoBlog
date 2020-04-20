@@ -1,0 +1,293 @@
+{% extends "base.html" %} 
+{% load static %}
+{% load daguerre %}
+{% block content %}
+
+	<!-- animsition-overlay start -->
+		<main class="animsition-overlay" data-animsition-overlay="true">
+		<!-- page-head start -->
+			<section id="up" class="page-head flex-min-height-box dark-bg-2">
+				<!-- page-head-bg -->
+				<div class="page-head-bg overlay-loading2" style="background-image: url({{ post.thumbnail.url }});"></div>
+				
+				<!-- flex-min-height-inner start -->
+	  			<div class="flex-min-height-inner">
+		  			<!-- flex-container start -->
+		  			<div class="container top-bottom-padding-120 flex-container response-999">
+			  			<!-- column start -->
+			  			<div class="six-columns six-offset">
+				  			<div class="content-left-margin-40">
+				  				<h2 class="large-title">
+									<span class="load-title-fill tr-delay03" data-text="{{post.title}}">{{post.title}}</span>
+								</h2>
+								<div class="d-flex-wrap top-margin-20">
+                                {% for cat in post.categories.all  %}
+								
+								{% if cat|length > 1 %}
+								<p>{{cat}}</p>
+
+								<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay06 top-margin-10" href="#" data-text="{{cat}},{{cat}}">{{cat}},{{cat}}</a>
+								{% else %}
+
+								<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay06 top-margin-10" href="#" data-text="{{cat}}">{{cat}}</a>
+
+								
+									
+								{% endif %}
+									
+                                
+                                {% endfor %}
+            
+									
+                                
+									<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay07 top-margin-10" href="#" data-text="By: {{ post.author}}">By: {{ post.author}}</a>
+									<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay08 top-margin-10" href="#" data-text="{{ post.date_published }}">{{ post.date_published }} </a>
+								</div>
+				  			</div>
+			  			</div><!-- column end -->
+		  			</div><!-- flex-container end -->
+	  			</div><!-- flex-min-height-inner end -->
+	  			
+	  			<!-- scroll-btn start -->
+				<a href="#down" class="scroll-btn pointer-large">
+					<div class="scroll-arrow-box">
+						<span class="scroll-arrow"></span>
+					</div>
+					<div class="scroll-btn-flip-box">
+						<span class="scroll-btn-flip" data-text="Scroll">Scroll</span>
+					</div>
+				 </a><!-- scroll-btn end -->
+			</section><!-- page-head end -->
+
+			<!-- single-post start -->
+			<div id="down" class="single-post container bottom-padding-30 top-padding-120 light-bg-1" data-midnight="black">
+				<!-- flex-container start -->
+				<div class="flex-container">
+					<!-- column start -->
+					<div class="eight-columns">
+						<!-- single-post-content start -->
+						<div class="light-bg-2">
+							<a class="photo-popup pointer-zoom" href="{{ post.thumbnail.url }}">
+								<img src="{{ post.thumbnail.url }}" alt="title">
+							</a>
+							<!-- content-margin-block start -->
+							<div class="content-margin-block">
+								<!-- entry-content start -->
+								<article class="entry-content">
+									<p class="p-style-medium text-color-1">{{ post.description_one|striptags|safe}}</p>
+									
+									<blockquote class="quote-content">
+										<p class="p-style-bold text-justify text-color-4">{{ post.caption|striptags|safe }}</p>
+									</blockquote>
+									
+									<!-- post-img-flex start -->
+									<div class="post-img-flex">
+								
+									{% for image in post.get_pictures.all %}
+										<a class="post-img-box photo-popup" href="{{ image.picture.url }}">
+											<div class="pointer-zoom">
+												<img src="{{ image.picture.url }}" alt="pictures" style='height: 250px; width: 100%; object-fit: cover;  object-position: 50% 50%;'>
+											</div>
+										</a>
+									{% endfor %}										
+									</div><!-- post-img-flex end --> 
+									<p class="p-style-medium text-color-1">{{ post.description_two|striptags|safe }}</p>
+								</article><!-- entry-content end -->
+									
+								<!-- post-share start -->
+								<div class="post-share">
+									<span class="xsmall-title-oswald text-color-2">share this article: </span>
+									<ul class="post-share-social text-color-1">
+										<li><a class="pointer-small hover-color" href="#"><i class="fab fa-whatsapp"></i></a></li>
+										<li><a class="pointer-small hover-color" href="#"><i class="fab fa-instagram"></i></a></li>
+										<li><a class="pointer-small hover-color"  href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a class="pointer-small hover-color" href="#"><i class="fab fa-pinterest-p"></i></a></li>
+										<li><a class="pointer-small hover-color" href="#"><i class="fab fa-twitter"></i></a></li>
+									</ul>
+								</div><!-- post-share end -->
+							</div><!-- content-margin-block end -->
+						</div><!-- single-post-content end -->
+
+						<!-- post-prev-next start -->
+						<div class="top-padding-30 bottom-padding-30">
+							<h2 class="p-style-bold-up text-color-1">Related Posts</h2>
+							<!-- flex-container start -->
+							<div class="flex-container response-999 top-margin-30">
+							{% for r_post in related_posts %}
+								<!-- column start -->
+								<div class="four-columns bottom-padding-20">
+									<div class="content-right-margin-20">
+										<a href="{{ r_post.get_absolute_url }}" class="hover-box pointer-large animsition-link d-block light-bg-2">
+											<div class="hidden-box">
+												<img class="hover-img" src="{{r_post.thumbnail.url}}" alt="title"  
+												style='height:160px; width: 100%; object-fit: cover;  object-position: 50% 50%;'>
+											</div>
+											<div class="content-padding-bottom-20 content-padding-l-r-20">
+												<h3 class="xsmall-title-oswald text-color-1 hover-content top-margin-20">{{r_post.title}}</h3><br>
+												<div class="p-style-xsmall text-color-2 text-height-10 hover-content tr-delay01 top-margin-5">{{r_post.date_published}}</div>
+											</div>
+										</a>
+									</div>
+								</div><!-- column end -->
+							{% endfor %}								
+							</div><!-- flex-container end -->
+						</div><!-- post-prev-next end -->
+							
+						<!-- post-comments start -->
+						<div class="bottom-padding-90">
+							{% if comments.count < 2 %}
+								<h4 class="p-style-bold-up text-color-1">{{ comments.count }} comment</h4>
+							{% else %}
+								<h4 class="p-style-bold-up text-color-1">{{ comments.count }} comments</h4>
+							{% endif %}
+							<!-- comments-box start -->
+							<div class="comments-box top-margin-30">
+								<!-- comments-form-box start -->
+								{% if request.user.is_authenticated %} 
+									<!-- comments-form-box start -->
+									<div class="comments-form-box">
+									
+										<h4 class="p-style-bold-up text-color-1">Comment</h4>
+										<form class="comments-form top-margin-30" method="POST" action=".">
+										 {% csrf_token %}
+											{{ comment_form.content }}
+											<button class="arrow-btn-box pointer-large">
+												<span class="arrow-btn">Comment</span>
+											</button>	
+										</form>
+									</div>
+									<!-- comments-form-box end -->
+								{% else %}
+										<div class="comments-form-box">
+											<h4 class="p-style-bold-up text-color-1">Sign In to leave a comment</h4>
+											<br>
+											<br>
+											<a href="{% url 'sign_in' %}?next={{ request.path|urlencode }}">
+												<button class="arrow-btn-box pointer-large" type="submit">
+													<span class="arrow-btn">Sign In</span>
+												</button>
+											</a>										
+										</div>
+								{% endif %}
+								<!-- comments-form-box end -->
+								<br>
+								<br>
+								<!-- comments-list start -->
+								<ul class="comments-list">						
+									<!-- comment start -->
+										{% for comment in comments %}
+											<li class="comment-content">
+												<div class="comment-avatar">
+													<img src="{{comment.user.profile_picture.url }}" alt="avatar">
+												</div>
+												<div class="post-comment">
+													<h6 class="small-title-oswald text-color-1">{{comment.user.username}}</h6>
+													<div class="date p-style-xsmall text-color-2 text-height-10">
+														{{comment.time_stamp|timesince}} ago
+													</div>
+													<p class="p-style-small text-height-15 text-color-1">{{ comment.content }}</p>
+													<br>
+														<br>
+															<br>
+
+													<a class="reply small-title-oswald text-color-1 hover-color pointer-large" href="#">reply</a>
+													<a class="reply-view toggle small-title-oswald text-color-1 hover-color pointer-large" href="#"></i>
+													{% if comment.children.count == 0 %}
+													{% elif comment.children.count == 1  %}
+													View {{comment.children.count}} Reply  <i class="fas fa-angle-down"></i>
+													{% else %}
+													View {{comment.children.count}} Replies  <i class="fas fa-angle-down"></i>
+													{% endif %}	
+													</a>
+												</div>
+												<div class="comment-reply-box" style="display:none;">
+													<br>
+													<br>
+													<br>
+														{% if request.user.is_authenticated %} 
+															<!-- comments-form-box start -->
+															<div class="comments-form-box">
+															
+																<h4 class="p-style-bold-up text-color-1">Reply</h4>
+																<form class="comments-form top-margin-30" method="POST" action=".">
+																{% csrf_token %}
+																	<input type="hidden" name="parent_id" value = "{{comment.id}}">
+																	{{ comment_form.content }}
+																	<button class="arrow-btn-box pointer-large">
+																		<span class="arrow-btn">Reply</span>
+																	</button>	
+																</form>
+															</div>
+															<!-- comments-form-box end -->
+														{% else %}
+																<div class="comments-form-box">
+																	<h4 class="p-style-bold-up text-color-1">Sign In to Reply</h4>
+																</div>
+														{% endif %}
+										  		</div>											
+														
+													<!-- comment-children start -->
+													<div class="toggle-content" style="display:none;">
+														{% for child_comment in comment.children %}
+															<ul class="comment-children">
+																<!-- comment start -->
+																<li class="comment-content">
+																	<div class="comment-avatar">
+																		<img src="{{child_comment.user.profile_picture.url }}" alt="avatar">
+																	</div>
+																	<div class="post-comment">
+																		<h6 class="small-title-oswald text-color-1">{{child_comment.user.username}}</h6>
+																		<div class="date p-style-xsmall text-color-2 text-height-10">
+																			{{child_comment.time_stamp|timesince}} ago
+																		</div>
+																		<p class="p-style-small text-height-15 text-color-1">{{ child_comment.content }}</p>
+																		<a class="reply reply-toggle small-title-oswald text-color-1 hover-color pointer-large" href="#">reply</a>
+																	</div>
+																	<!-- comment-children start -->
+																	<div class="reply-box-toggle" style="display:none;">
+																		<ul class="comment-children">
+																			<!--  form comment start -->
+																			<li>
+																			{% if request.user.is_authenticated %} 
+																				<!-- comments-form-box start -->
+																				<div class="comments-form-box">
+																					<h4 class="p-style-bold-up text-color-1">Reply</h4>
+																						<form class="comments-form top-margin-30" method="POST" action=".">
+																						{% csrf_token %}
+																							<input type="hidden" name="parent_id" value = "{{comment.id}}">
+																							{{ comment_form.content }}
+																							<button class="arrow-btn-box pointer-large">
+																								<span class="arrow-btn">Reply</span>
+																							</button>	
+																						</form>
+																				</div>
+																				<!-- comments-form-box end -->
+																			{% else %}
+																				<div class="comments-form-box">
+																					<h4 class="p-style-bold-up text-color-1">Sign In to Reply</h4>
+																				</div>
+																			{% endif %}
+																			</li><!--  form comment end -->
+																		</ul><!-- comment-children end -->
+																	</div>
+																</li><!-- comment end -->
+																	
+													
+															</ul><!-- comment-children end -->
+														{% endfor %}
+													</div>
+										
+												</li><!-- comment end -->
+											{% endfor %}
+										</div><!-- comments-box end -->
+									</div><!-- post-comments end -->
+								</div><!-- column end -->
+								<!-- column start -->
+					<!-- column start -->
+						{% include 'blog/snippets/sidebar.html'  with recent_posts=recent_posts categories=categories  %}
+					<!-- column end -->
+				</div><!-- flex-container end -->
+			</div><!-- single-post end -->
+		</main><!-- animsition-overlay end -->
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+{% if query_sets %}	
+	<!-- animsition-overlay start -->
+		<main class="animsition-overlay" data-animsition-overlay="true">
+    	<div class="services-bg" style="background-image:
+                linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.5),
+                rgba(0,0,0,0.5)),url({% static 'images/backgrounds/car.gif' %});
+                "></div>	
+			<!-- page-head start -->		
+			<section id="up" class="dark-bg-2 top-padding-10">
+
+  
+      
+				<div class="container">		
+				<!-- filter-buttons start --> 
+             
+     
+		
+
+          	<!-- widget-tags start -->
+								<div class="widget-tags top-padding-20" style=" width: 70%; margin: auto;">
+									<ul class="d-flex-wrap red-color" style=" width: 70%; margin: auto;">
+                  {% for cat in categories %}
+										<li>
+                     <form method="get" id="form-{{cat.categories__title}}"  action="{% url 'category' %}">
+                      <input type="hidden" id="{{cat.categories__title}}" name="q" value ="{{cat.categories__title}}"> 
+											<a id="btn-{{cat.categories__title}}" class="pointer-small small-title-oswald"> {{cat.categories__title}}</a>
+                    </form>
+										</li>
+                  {% endfor %}
+									</ul>
+								</div><!-- widget-tags end -->
+      
+      
+					<!-- filter-buttons end -->
+          
+
+        <!-- flex-container start -->
+          <div class="flex-container response-999 top-padding-20">
+          {% for post in query_sets %}        
+            <!-- column start -->
+            <div class="four-columns bottom-padding-90">
+              <article
+                class="content-right-margin-20 light-bg-2"
+                data-animation-container
+              >
+                <a
+                  href="{% url 'single_post' post.slug  %}"
+                  class="pointer-large animsition-link hover-box d-block"
+                >
+                  <div
+                    class="overlay-anim-box2 overlay-dark-bg-2"
+                    data-animation="overlay-anim2"
+                     style="width:100%; height:250px;"
+                  >
+                  <div style="width:100%;
+                              height:100%;
+                              background-size: cover;
+                              background-repeat: no-repeat;
+                              background-image: url({{ post.thumbnail.url}} );">
+                  </div>
+                   
+                  </div>
+                  <h3
+                    class="title-style text-color-1 top-margin-30 blog-title content-padding-l-r-20"
+                  >
+                    <span
+                      data-animation-child
+                      class="overlay-anim-box2 hover-content overlay-dark-bg-2 tr-delay01"
+                      data-animation="overlay-anim2"
+                      >{{ post.title}}</span
+                    >
+                  </h3>
+                </a>
+                
+                            <div class="content-padding-bottom-20 content-padding-l-r-20">
+                        
+                            <div
+                                data-animation-child
+                                class="blog-autor-date top-margin-30 fade-anim-box tr-delay06 text-color-1"
+                                data-animation="fade-anim"
+                            >
+                                <a
+                                class="xsmall-title-oswald pointer-small hover-color"
+                                href="{% url 'single_post' post.slug  %}"
+                                >{{ post.author}}</a
+                                >
+                                <a
+                                class="xsmall-title-oswald pointer-small hover-color"
+                                href="{% url 'single_post' post.slug  %}"
+                                >{{ post.date_published|timesince}} ago</a
+                                >
+                            </div>
+                            </div>
+                        </article>
+                        </div>
+                        <!-- column end -->
+                      {% endfor %}                      
+                    
+                    </div>
+                    <!-- flex-container end -->
+                </div><!-- container end -->     
+			</section><!-- dark-bg-2 end -->
+			
+			<div class="text-center top-bottom-padding-120 red-bg" data-midnight="black">	
+				<a href="#" class="pointer-large overlay-btn-box">
+					<span class="overlay-btn" data-text="loading more">loading more</span>
+				</a>
+			</div>
+		</main><!-- animsition-overlay end -->
+{% else %}
+	<!-- animsition-overlay start -->
+		<main class="animsition-overlay" data-animsition-overlay="true">
+			<!-- page-head start -->		
+		<section id="up" class="dark-bg-2 top-bottom-padding-120">
+				<!-- container start -->
+				<div class="container">					
+					<div class="text-center">
+						<h2 class="large-title text-height-10 title-fill" data-animation="title-fill-anim" data-text="No Result Found">No Result Found</h2><br>
+					</div>
+
+					<!-- filter-buttons start -->
+					<div class="filter-buttons top-padding-90">
+          {% for cat in categories %}
+						<button class="filter-button-box pointer-small" data-filter="{{cat.categories__title}}">
+							<span class="filter-button-flip" data-text="{{cat.categories__title}}">{{cat.categories__title}}</span>
+						</button>
+          {% endfor %}
+					</div>
+					<!-- filter-buttons end -->
+          <!-- top-padding-90 start -->
+				   <div class="top-padding-90">
+					<!-- container start -->
+					<div class="container">
+						<div class="services-bg" style="background-image:url({% static 'images/backgrounds/no-result.gif' %})"></div>	
+					</div><!-- container end -->
+			
+                </div><!-- container end -->       
+			</section><!-- dark-bg-2 end -->
+    </main>
+{% endif %}
+
+  
+{% endblock %}

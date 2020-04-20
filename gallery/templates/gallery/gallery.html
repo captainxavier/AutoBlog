@@ -1,0 +1,108 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+    <!-- animsition-overlay start -->
+    <main class="animsition-overlay" data-animsition-overlay="true">
+      <!-- page-head start -->
+      <!-- dark-bg-2 start -->
+      <section id="up" class="dark-bg-2 top-bottom-padding-20">
+        <!-- container start -->      
+       
+        <div class="container">
+          <div class="text-center">
+            <h2
+              class="large-title text-height-10 title-fill"
+              data-animation="title-fill-anim"
+              data-text="Gallery"
+            >
+              Gallery
+            </h2>
+            <br />
+          </div>
+         
+          <!-- filter-buttons start -->
+          <div class="filter-buttons top-padding-90">
+         
+
+          {% for category in categories %}
+            <button
+              class="filter-button-box pointer-small"
+              data-filter="*"
+            >
+             
+              <span class="filter-button-flip" data-text="{{ category.categories__title }}({{ category.categories__title__count }})"
+                >{{ category.categories__title }} ({{ category.categories__title__count }})</span
+              >
+              
+            </button>
+
+          {% endfor %}
+          </div>
+          <!-- filter-buttons end -->
+
+          <!-- works start -->
+          <div class="works">
+            <!-- grid-item start -->
+             {% for post_pic in post_pics %}             
+            <a href="{% url 'single_post' post_pic.slug %}" class="animsition-link grid-item uiux">
+              <div class="work_item pointer-large hover-box hidden-box">
+              {% if forloop.counter|divisibleby:2 %}
+                  <img
+                    class="hover-img"
+                    src="{{ post_pic.thumbnail.url }}"
+                    alt="Photo"
+                    style='height: 300px; width: 100%; object-fit: cover;  object-position: 50% 50%;'
+                  />
+                {% else %}
+                  <img
+                  class="hover-img"
+                  src="{{ post_pic.thumbnail.url }}"
+                  alt="Photo"
+                  style='height: 400px; width: 100%; object-fit: cover;  object-position: 50% 50%;'
+                  />
+                {% endif %}             
+                <div class="works-content">
+                {% for cat in post_pic.categories.all %}
+
+                  <span class="small-title-oswald red-color work-title-overlay"
+                    >{{cat}}</span
+                  >
+
+                  {% endfor %}
+                  <h3 class="title-style text-color-4">
+                    <span class="work-title-overlay work-title-delay01"
+                      >{{ post_pic.title }}</span
+                    >
+                  </h3>
+                </div>
+              </div> </a
+            ><!-- grid-item end --> 
+            {% endfor %}         
+          </div>
+          <!-- works end -->
+          
+      
+        </div>
+        <!-- container end -->
+        
+      </section>
+      <!-- dark-bg-2 end -->
+
+      <div
+        class="text-center top-bottom-padding-120 red-bg"
+        data-midnight="black"        
+      >
+       {% if post_pics.has_previous  %}
+        <a href="?page={{ post_pics.previous_page_number }}"  class="pointer-large overlay-btn-box">
+          <span class="overlay-btn" data-text="loading more">Previous Page</span>
+        </a>
+      {% endif %} 
+      {% if post_pics.has_next %}
+        <a href="?page={{ post_pics.next_page_number }}"  class="pointer-large overlay-btn-box">
+          <span class="overlay-btn" data-text="loading more">load more</span>
+        </a>
+      {% endif %} 
+      </div>
+    </main>
+    <!-- animsition-overlay end -->
+   {% endblock %}

@@ -35,15 +35,24 @@ ALLOWED_HOSTS = ['xaviautoblog.herokuapp.com']
 INSTALLED_APPS = [
     # installed apps
     'accounts',
+    'blog',
+    'comments',
+    'contacts',
+    'gallery',
+    'home',
+    'portfolio',
     # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.humanize',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
      # django-storages
     'storages',
+     # Install Libraries
+    'active_link',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +73,7 @@ ROOT_URLCONF = 'autoblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

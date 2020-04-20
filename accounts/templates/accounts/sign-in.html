@@ -1,0 +1,63 @@
+{% extends "base_login.html" %} 
+{% load static %}
+{% block content %}
+    <div class="form-body">
+     <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="{% static 'images/logo/logo-white-two.png' %}" alt="logo">
+                </div>
+            </a>
+      </div>
+      <div class="row">
+        <div class="img-holder">
+          <div class="bg"></div>
+          
+            <div class="info-holder-logo">
+                  <a href="{% url 'home' %}?next={{request.path}}">
+                    <img src="{% static 'images/logo/logo-white-two.png' %}" alt="logo" 4
+                    style='width: 150px; object-fit: cover;  object-position: 50% 50%;'
+                    >
+                  </a>
+            </div>
+          
+        </div>
+        <div class="form-holder">
+          <div class="form-content">
+            <div class="form-items">
+              <h3>Sign In</h3>
+              <div class="page-links">
+                <a href="{% url 'sign_in' %}" class="active">Sign In</a
+                ><a href="{% url 'sign_up' %}">Sign Up</a>
+              </div>
+              <form method="POST">
+                {% csrf_token %} 
+                 {{ form.email }} 
+                {{ form.password }} 
+                {% if request.GET.next  %}
+                  <input
+                    type="hidden"
+                    name="next"
+                    value="{{ request.GET.next }}"
+                  />                
+                {% endif %}
+               
+                <div class="form-button">
+                   {% for field in form %}   
+                      {% for error in field.errors %}
+                          <p style="color: red;"> {{error}}</p>
+                      {%endfor%}
+                  {% endfor %}
+                  {% if form.non_field_errors %}
+                      <small style="color: red;"> {{form.non_field_errors}}</small>
+                  {%endif%}
+                  <button id="submit" type="submit" class="ibtn">Sign In</button>
+                  <a href="#">Forget password?</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   {% endblock %}

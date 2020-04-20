@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+ {% include 'snippets/head_authentication.html'  %}
+  <body>
+    
+     {% block content %}
+
+    {% endblock %}   
+{% include 'snippets/script_auth.html'  %}
+{% block javascript %}
+{% endblock %}
+  </body>
+ 
+</html>

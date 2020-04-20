@@ -55,7 +55,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=100)
     date_joined	= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
-    profile_picture = models.ImageField(upload_to=upload_profile_pic, max_length=500)
+    profile_picture = models.ImageField(upload_to=upload_profile_pic, max_length=500,null=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_active= models.BooleanField(default=True)
     is_staff= models.BooleanField(default=False)

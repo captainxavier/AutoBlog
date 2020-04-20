@@ -1,0 +1,114 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+{% if query_sets %}	
+	<!-- animsition-overlay start -->
+		<main class="animsition-overlay" data-animsition-overlay="true">
+    	<div class="services-bg" style="background-image:
+                linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.8),
+                rgba(0,0,0,0.8)),url({% static 'images/backgrounds/car.gif' %});
+                "></div>	
+			<!-- page-head start -->		
+			<section id="up" class="dark-bg-2 top-bottom-padding-20">
+				<!-- container start -->
+      <!-- flex-container start -->
+				<div class="flex-container container bottom-padding-60">
+					<!-- column start -->
+					<div class="four-columns bottom-padding-60">
+						<div data-animation-container class="content-right-margin-20 team-title-box">
+							<h2 data-animation-child class="small-title-oswald overlay-anim-box2 red-color" data-animation="overlay-anim2">Your Search</h2>
+               {% if query_sets|length == 1 %}
+                <h3 class="title-style text-color-4">
+								<span data-animation-child class="overlay-anim-box2 overlay-light-bg-1 tr-delay01" data-animation="overlay-anim2">Showing</span><br>
+								<span data-animation-child class="overlay-anim-box2 overlay-light-bg-1 tr-delay02" data-animation="overlay-anim2">{{ query_sets|length }} Result</span><br>
+								<span data-animation-child class="overlay-anim-box2 overlay-light-bg-1 tr-delay03" data-animation="overlay-anim2">From Your Search</span>
+						   	</h3>
+                {% else %}
+                <h3 class="title-style text-color-4">
+								<span data-animation-child class="overlay-anim-box2 overlay-light-bg-1 tr-delay01" data-animation="overlay-anim2">Showing</span><br>
+								<span data-animation-child class="overlay-anim-box2 overlay-light-bg-1 tr-delay02" data-animation="overlay-anim2">{{ query_sets|length }} Results</span><br>
+								<span data-animation-child class="overlay-anim-box2 overlay-light-bg-1 tr-delay03" data-animation="overlay-anim2">From Your Search</span>
+						   	</h3>
+                {% endif %}
+						</div>
+					</div><!-- column end -->
+					<!-- column start -->
+          {% for post in query_sets %}
+					<div class="four-columns bottom-padding-60">
+						<a data-animation-container href="{% url 'single_post' post.slug  %}" class="content-left-right-margin-10 hover-box pointer-large d-block">
+							<div data-animation-child class="overlay-anim-box2 overlay-dark-bg-1 team-img-box" data-animation="overlay-anim2"
+              >
+								<img class="hover-img" src="{{ post.thumbnail.url}}" alt="Photo"style='height: 250px; width: 100%; object-fit: cover'>
+							</div>
+							<div class="team-content">
+								<h4 data-animation-child class="small-title-oswald text-color-4 hover-content fade-anim-box tr-delay01" data-animation="fade-anim">{{ post.title}}</h4><br>
+                {% for cat in post.categories.all %}
+								<p data-animation-child class="p-letter-style text-color-4 hover-content fade-anim-box tr-delay02" data-animation="fade-anim">{{ cat }}</p>
+                {% endfor %}
+							</div>
+						</a>
+					</div>
+          {% endfor %}
+          <!-- column end -->
+				</div><!-- flex-container end --> 
+			</section><!-- dark-bg-2 end -->
+
+      
+      <div class="text-center top-bottom-padding-120 red-bg" data-midnight="black">
+      {% if query_sets.has_previous %}	
+			 <a href="?page={{ query_sets.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pointer-large overlay-btn-box">
+					<span class="overlay-btn" data-text="go to previous">go to previous</span>
+				</a>
+      {% endif %} 
+      </div>
+      
+       
+
+    
+			
+      
+      <div class="text-center top-bottom-padding-120 red-bg" data-midnight="black">	
+      {% if query_sets.has_next %}
+				<a href="?page={{ query_sets.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pointer-large overlay-btn-box">
+					<span class="overlay-btn" data-text="loading more">loading more</span>
+				</a>
+      {% endif %} 
+      </div>
+      
+			
+     
+		</main><!-- animsition-overlay end -->
+{% else %}
+	<!-- animsition-overlay start -->
+		<main class="animsition-overlay" data-animsition-overlay="true">
+			<!-- page-head start -->		
+		<section id="up" class="dark-bg-2 top-bottom-padding-120">
+				<!-- container start -->
+				<div class="container">					
+					<div class="text-center">
+						<h2 class="large-title text-height-10 title-fill" data-animation="title-fill-anim" data-text="No Result Found">No Result Found</h2><br>
+					</div>
+
+					<!-- filter-buttons start -->
+					<div class="filter-buttons top-padding-90">
+          {% for cat in categories %}
+						<button class="filter-button-box pointer-small" data-filter="{{cat.categories__title}}">
+							<span class="filter-button-flip" data-text="{{cat.categories__title}}">{{cat.categories__title}}</span>
+						</button>
+          {% endfor %}
+					</div>
+					<!-- filter-buttons end -->
+          <!-- top-padding-90 start -->
+				   <div class="top-padding-90">
+					<!-- container start -->
+					<div class="container">
+						<div class="services-bg" style="background-image:url({% static 'images/backgrounds/no-result.gif' %})"></div>	
+					</div><!-- container end -->
+			
+                </div><!-- container end -->       
+			</section><!-- dark-bg-2 end -->
+    </main>
+{% endif %}
+
+  
+{% endblock %}

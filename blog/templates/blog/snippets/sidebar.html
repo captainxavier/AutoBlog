@@ -1,0 +1,97 @@
+	<!-- column start -->
+  {% load humanize %}
+					<aside class="four-columns bottom-padding-90">
+						<!-- sidebar start -->
+						<div class="sidebar content-left-margin-40 red-bg">
+							<!-- sidebar-box start -->
+							<div class="sidebar-box">
+								 <!-- form search start -->
+									<div class="top-bottom-padding-90">
+									<form method="get" class="form-search" action="{% url 'result_search' %}">
+										<input
+										id="id_q"
+										type="text"
+										name="q"
+										class="search-control pointer-small"
+										placeholder="Search..."
+										/>
+										<button class="search-btn pointer-large" type="submit" >
+										<i class="fas fa-search"></i>
+										</button>
+									</form>
+									</div>
+									<!-- form search end -->
+
+								
+								<!-- widget-categories start -->
+								<div class="widget-categories bottom-padding-90">
+									<h4 class="p-style-bold-up red-color">categories</h4>				
+                  <ul class="top-margin-10 red-color">
+                  {% for cat in categories %}                  
+										<li>
+                    <a href="{% url 'category' %}" id="cat-btn" class="pointer-small small-title-oswald">
+                         {{cat.categories__id}} ({{cat.categories__title__count}})</a>
+									</li>                   
+                  {% endfor %}
+									</ul>
+								</div><!-- widget-categories end -->
+							
+							   <!-- recent posts start -->
+                                <div class="bottom-padding-90">
+                                <h4 class="p-style-bold-up red-color">recent posts</h4>
+                                <!-- recent posts content start -->
+                                <div class="top-margin-30">
+                                    <!-- recent-entry start -->
+                                    {% for recent in recent_posts %}
+                                    <div class="recent-entry">
+                                    <a
+                                        href="{{ recent.get_absolute_url }}"
+                                        class="recent-entry-img-box pointer-large animsition-link"
+                                    >
+                                        <img
+                                        src="{{ recent.thumbnail.url }}"
+                                        alt="title"
+                                        style='height:50px; width: 100%; object-fit: cover;  object-position: 50% 50%;'
+                                        />
+                                    </a>
+                                    <div class="recent-desc">
+                                        <a
+                                        href="{{ recent.get_absolute_url }}"
+                                        class="xsmall-title-oswald text-color-4 pointer-large animsition-link"
+                                        >{{ recent.title }}</a
+                                        >
+                                        <div
+                                        class="p-style-xsmall text-color-4 text-height-10 top-margin-5"
+                                        >
+                                        {{recent.date_published|naturaltime}}
+                                        </div>
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                                    <!-- recent-entry end -->
+                                        
+                                
+                                </div>
+                                <!-- recent posts content end -->
+                                </div>
+                                <!-- recent posts end -->
+
+                <!-- widget-tags start -->
+                <div class="widget-tags bottom-padding-90">
+                  <h4 class="p-style-bold-up red-color">tags</h4>
+                  <ul class="d-flex-wrap top-margin-30 red-color">
+                    {% for cat in categories %}
+                    <li>
+                      <a href="#" class="pointer-small small-title-oswald"
+                        >{{cat.categories__title}}</a
+                      >
+                    </li>
+                    {% endfor %}                   
+                  </ul>
+                </div>
+                <!-- widget-tags end -->
+								
+						
+							</div><!-- sidebar-box end -->
+						</div><!-- sidebar end -->
+					</aside><!-- column end -->

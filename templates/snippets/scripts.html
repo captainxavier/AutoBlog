@@ -1,0 +1,31 @@
+ {% load static %}
+ <!-- scripts -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+   <script src="{% static 'js/particles_init.js' %}"></script>
+   <script>
+   $(".reply").click(function(event){
+      event.preventDefault();
+      $(this).parent().next(".comment-reply-box").fadeToggle();
+   })
+   </script>
+  <script>
+   $('.toggle').click(function(event) {
+      event.preventDefault();
+   $('.toggle-content').fadeToggle();
+   });
+   </script>
+<script>
+   $('.reply-toggle').click(function(event) {
+      event.preventDefault();
+   $('.reply-box-toggle').fadeToggle();
+   });
+</script>
+<script>
+document.getElementById("form-cat").onclick = function() {
+
+   document.getElementById("cat-btn").submit();
+}
+</script>
+   
+   

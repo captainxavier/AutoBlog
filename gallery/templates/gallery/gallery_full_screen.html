@@ -1,0 +1,81 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+    <!-- animsition-overlay start -->
+    <main id="up" class="animsition-overlay" data-animsition-overlay="true">
+      <!-- portfolio-slider start -->
+      <div class="portfolio-slider">
+        <!-- swiper-wrapper start -->
+        <div class="swiper-wrapper">
+        {% for post in posts %}
+          <!-- slide start -->
+          <div class="swiper-slide">
+            <div class="swiper-image" data-swiper-parallax-y="50%">
+              <div
+              {% comment %} url({{ post.thumbnail.url }}); {% endcomment %}
+                class="swiper-image-inner"
+                style="background-image:
+                linear-gradient(to right, rgba(15,12,41,0.53), rgba(48,43,99,0.53),
+                rgba(36,36,62,0.53)),url({{ post.thumbnail.url }});"
+              >
+               <div class="portfolio-slider-overlay-box">
+               {% for cat in post.categories.all  %}
+					          <span class="small-title-oswald text-color-4 portfolio-slider-overlay">{{ cat }}</span>
+              {% endfor %}
+					      </div>
+								<div class="portfolio-slider-content container">
+								<div>
+										<h2 class="large-title text-color-4">
+											<a class="pointer-large animsition-link" href="{{ post.get_absolute_url }}">
+												<span class="hidden-box d-block text-height-10">
+													<span class="portfolio-slider-fade portfolio-slider-tr-01">{{ post.title }}</span>
+												</span>
+											</a>
+										</h2>
+									</div>
+								</div>
+                <div class="portfolio-slider-content container">
+                  <div>
+                    <h2 class="large-title text-color-4">
+                      <a
+                        class="pointer-large animsition-link"
+                        href="{% url 'single_post' post.slug %}"
+                      >
+                        <span class="hidden-box d-block text-height-10">
+                          <span
+                            class="portfolio-slider-fade portfolio-slider-tr-01"
+                            > {{ post.slogan}}</span
+                          >
+                        </span>
+                      </a>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- slide end -->  
+          {% endfor %}      
+        </div>
+        <!-- swiper-wrapper end -->
+        <!-- swiper-pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- swiper-button-next start -->
+        <div class="swiper-button-next">
+          <div class="slider-arrow-next-box">
+            <span class="slider-arrow-next"></span>
+          </div>
+        </div>
+        <!-- swiper-button-next end -->
+        <!-- swiper-button-prev start -->
+        <div class="swiper-button-prev">
+          <div class="slider-arrow-prev-box">
+            <span class="slider-arrow-prev"></span>
+          </div>
+        </div>
+        <!-- swiper-button-prev end -->
+      </div>
+      <!-- portfolio-slider end -->
+    </main>
+    <!-- animsition-overlay end -->
+ {% endblock %}

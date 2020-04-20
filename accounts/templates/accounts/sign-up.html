@@ -1,0 +1,68 @@
+{% extends "base_login.html" %} 
+{% load static %}
+{% block content %}
+    <div class="form-body">
+      <div class="website-logo">
+        <a href="{% url 'home' %}">
+          <div class="logo">
+            <img class="logo-size" src="{% static 'images/logo/logo-white.png '%}" alt="logo" />
+          </div>
+        </a>
+      </div>
+      <div class="row">
+        <div class="img-holder">
+          <div class="bg"></div>
+          <div class="info-holder-logo">
+                  <a href="{% url 'home' %}?next={{request.path}}">
+                    <img src="{% static 'images/logo/logo-white-two.png' %}" alt="logo" 4
+                    style='width: 150px; object-fit: cover;  object-position: 50% 50%;'
+                    >
+                  </a>
+            </div>
+        </div>
+        <div class="form-holder">
+          <div class="form-content">
+            <div class="form-items">
+              <h3>Create Account</h3>
+              <br>
+              <div class="page-links">
+                <a href="{% url 'sign_in' %}">Sign In</a
+                ><a href="{% url 'sign_up' %}" class="active">Sign Up</a>
+              </div>
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %} 
+                {{ form.email }} 
+                {{ form.first_name }} 
+                {{ form.last_name }} 
+                {{ form.username }} 
+                {{ form.password1 }} 
+                {{ form.password2 }}
+                <label>{{ form.profile_picture.label }} </label>
+                {{ form.profile_picture }}              
+                {% if request.GET.next  %}
+                  <input
+                    type="hidden"
+                    name="next"
+                    value="{{ request.GET.next }}"
+                  />                
+                {% endif %}
+                <div class="form-button">
+
+                 {% for field in form %}
+                  <p>
+                    {% for error in field.errors %}
+                        <p style="color: red;"> {{error}}</p>
+                    {%endfor%}
+                  </p>
+                  {%endfor%}
+                  <button id="submit" type="submit" class="ibtn">
+                    Create Account
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+   {% endblock %}
