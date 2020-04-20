@@ -25,7 +25,7 @@ SECRET_KEY = 'yo$92s72pl%t-$2-0apwy@kyklyxgv1kzq__4^hpg6b52o98ib'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://xaviautoblog.herokuapp.com']
+ALLOWED_HOSTS = ['xaviautoblog.herokuapp.com']
 
 
 # Application definition
