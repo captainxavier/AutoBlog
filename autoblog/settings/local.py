@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # installed apps
     'accounts',
     'blog',
+    'category',
     'comments',
     'contacts',
     'gallery',
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
      # Install Libraries
     'active_link',
+    'ckeditor',
+    'taggit',
 ]
 
 MIDDLEWARE = [

@@ -22,7 +22,17 @@
 					      	<div class="container top-bottom-padding-120">
                    {% for cat in super_featured_post.categories.all  %}
                 
-					          	<h2 class="slider-overlay2 medium-title red-color"> {{ cat }}, </h2>
+					          	<h2 class="slider-overlay2 medium-title red-color">
+                      {% if forloop.first and forloop.counter == 1  %}
+                        in {{ cat }}.
+                      {% elif forloop.counter > 2  %}
+                        in {{ cat }},
+                      {% elif forloop.last %}
+                         & {{ cat }}.
+                      {% else %}
+                        {{ cat }},
+                      {% endif %}
+                       </h2>
                     
                    {% endfor %}
 						  	

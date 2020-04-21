@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 # Site View
 from home.views import (home_screen_view)
-from blog.views import (blog_screen_view)
+from blog.views import (blog_screen_view,post_screen_view)
 from gallery.views import (gallery_screen_view, full_screen_view)
 from contacts.views import (contact_screen_view)
 from portfolio.views import (portfolio_screen_view)
@@ -38,7 +38,7 @@ urlpatterns = [
     path('signin/', sign_in_view, name='sign_in'),
     path('logout/', logout_view, name='logout'),
     path('result_search/', blog_screen_view, name='result_search'),
-    path('<slug>/', blog_screen_view, name='single_post'),
+    path('<slug>/', post_screen_view, name='single_post'),
     path('category/', blog_screen_view, name='category'),
 ]
 

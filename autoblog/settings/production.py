@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     # installed apps
     'accounts',
     'blog',
+    'category',
     'comments',
     'contacts',
     'gallery',
@@ -54,6 +55,8 @@ INSTALLED_APPS = [
     'storages',
      # Install Libraries
     'active_link',
+    'ckeditor',
+    'taggit',
 ]
 
 MIDDLEWARE = [

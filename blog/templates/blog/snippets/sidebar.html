@@ -30,7 +30,7 @@
                   {% for cat in categories %}                  
 										<li>
                     <a href="{% url 'category' %}" id="cat-btn" class="pointer-small small-title-oswald">
-                         {{cat.categories__id}} ({{cat.categories__title__count}})</a>
+                         {{cat.categories__title}} ({{cat.categories__title__count}})</a>
 									</li>                   
                   {% endfor %}
 									</ul>

@@ -1,6 +1,5 @@
 {% extends "base.html" %} 
 {% load static %}
-{% load daguerre %}
 {% block content %}
 
 	<!-- animsition-overlay start -->
@@ -22,24 +21,23 @@
 								</h2>
 								<div class="d-flex-wrap top-margin-20">
                                 {% for cat in post.categories.all  %}
-								
-								{% if cat|length > 1 %}
-								<p>{{cat}}</p>
-
-								<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay06 top-margin-10" href="#" data-text="{{cat}},{{cat}}">{{cat}},{{cat}}</a>
-								{% else %}
-
-								<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay06 top-margin-10" href="#" data-text="{{cat}}">{{cat}}</a>
-
-								
-									
-								{% endif %}
-									
-                                
+									{% if forloop.first %}
+									 	<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay06 top-margin-10" 
+										 href="#" 
+										 data-text="In {{cat}}">In {{cat}}
+										</a>
+									{% elif forloop.last %}
+										<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay06 top-margin-10" 
+										 href="#" 
+										 data-text="{{cat}}">{{cat}}
+										</a>
+									{% else %}
+										<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay06 top-margin-10" 
+										 href="#" 
+										 data-text="{{cat}}">{{cat}}
+										</a>
+									{% endif %}									
                                 {% endfor %}
-            
-									
-                                
 									<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay07 top-margin-10" href="#" data-text="By: {{ post.author}}">By: {{ post.author}}</a>
 									<a class="small-title-oswald text-height-20 pointer-large load-title-fill tr-delay08 top-margin-10" href="#" data-text="{{ post.date_published }}">{{ post.date_published }} </a>
 								</div>
@@ -81,8 +79,7 @@
 									</blockquote>
 									
 									<!-- post-img-flex start -->
-									<div class="post-img-flex">
-								
+									<div class="post-img-flex">								
 									{% for image in post.get_pictures.all %}
 										<a class="post-img-box photo-popup" href="{{ image.picture.url }}">
 											<div class="pointer-zoom">
@@ -92,6 +89,8 @@
 									{% endfor %}										
 									</div><!-- post-img-flex end --> 
 									<p class="p-style-medium text-color-1">{{ post.description_two|striptags|safe }}</p>
+									<br>
+									<p class="p-style-medium text-color-1">{{ post.description_three|striptags|safe }}</p>
 								</article><!-- entry-content end -->
 									
 								<!-- post-share start -->
@@ -233,7 +232,12 @@
 																<!-- comment start -->
 																<li class="comment-content">
 																	<div class="comment-avatar">
-																		<img src="{{child_comment.user.profile_picture.url }}" alt="avatar">
+																		<img src="{% if child_comment.user.profile_picture %}
+																					{{ child_comment.user.profile_picture.url }}
+																					{% else %}
+																					{% static 'images/profile_picture/vw.jpg' %}
+																					{% endif %}"
+																	alt="avatar">
 																	</div>
 																	<div class="post-comment">
 																		<h6 class="small-title-oswald text-color-1">{{child_comment.user.username}}</h6>
